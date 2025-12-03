@@ -1,94 +1,137 @@
-@extends('layout.app')
+@extends('layouts.app') 
+{{-- pastikan ini sesuai dengan layout AdminLTE kamu --}}
 
 @section('title', 'Dashboard Site Manager')
 
 @section('content')
+<div class="container-fluid">
 
-<h1 class="text-2xl font-bold mb-6">Dashboard Site Manager</h1>
+    <h1 class="mb-4">Dashboard Site Manager</h1>
 
-<!-- INFO CARDS -->
-<div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+    <!-- INFO CARDS -->
+    <div class="row">
 
-    <div class="bg-white p-6 rounded-lg shadow">
-        <h3 class="text-gray-600">Total Proyek</h3>
-        <p class="text-3xl font-bold mt-2">12</p>
+        <div class="col-lg-4 col-12">
+            <div class="small-box bg-info">
+                <div class="inner">
+                    <h3>12</h3>
+                    <p>Total Proyek</p>
+                </div>
+                <div class="icon">
+                    <i class="fas fa-project-diagram"></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4 col-12">
+            <div class="small-box bg-success">
+                <div class="inner">
+                    <h3>67%</h3>
+                    <p>Progress Rata-rata</p>
+                </div>
+                <div class="icon">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4 col-12">
+            <div class="small-box bg-warning">
+                <div class="inner">
+                    <h3>Rp 845.300.000</h3>
+                    <p>Total Pengeluaran</p>
+                </div>
+                <div class="icon">
+                    <i class="fas fa-money-bill-wave"></i>
+                </div>
+            </div>
+        </div>
+
     </div>
 
-    <div class="bg-white p-6 rounded-lg shadow">
-        <h3 class="text-gray-600">Progress Rata-rata</h3>
-        <p class="text-3xl font-bold mt-2">67%</p>
+    <!-- QUICK MENU -->
+    <div class="row">
+
+        <div class="col-md-3 col-6">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">Kelola Proyek</h5>
+                    <p class="card-text">Tambah, edit, dan kelola data proyek.</p>
+                    <a href="/proyek" class="btn btn-primary btn-sm">Lihat</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3 col-6">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">Kelola Material</h5>
+                    <p class="card-text">Pantau stok material.</p>
+                    <a href="/material" class="btn btn-primary btn-sm">Lihat</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3 col-6">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">Kelola Equipment</h5>
+                    <p class="card-text">Pantau alat proyek.</p>
+                    <a href="/equipment" class="btn btn-primary btn-sm">Lihat</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3 col-6">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">Laporan Proyek</h5>
+                    <p class="card-text">Lihat laporan lengkap.</p>
+                    <a href="/laporan" class="btn btn-primary btn-sm">Lihat</a>
+                </div>
+            </div>
+        </div>
+
     </div>
 
-    <div class="bg-white p-6 rounded-lg shadow">
-        <h3 class="text-gray-600">Total Pengeluaran</h3>
-        <p class="text-3xl font-bold mt-2">Rp 845.300.000</p>
+    <!-- TABEL PROYEK -->
+    <div class="card mt-4">
+        <div class="card-header">
+            <h3 class="card-title">Daftar Proyek</h3>
+        </div>
+
+        <div class="card-body p-0">
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>Nama Proyek</th>
+                        <th>Lokasi</th>
+                        <th>Progress</th>
+                        <th>Deadline</th>
+                        <th>Aksi</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr>
+                        <td>Pembangunan Ruko A</td>
+                        <td>Jakarta</td>
+                        <td>80%</td>
+                        <td>20 Jan 2025</td>
+                        <td><a href="#" class="btn btn-info btn-sm">Lihat</a></td>
+                    </tr>
+
+                    <tr>
+                        <td>Renovasi Gudang B</td>
+                        <td>Bandung</td>
+                        <td>40%</td>
+                        <td>10 Feb 2025</td>
+                        <td><a href="#" class="btn btn-info btn-sm">Lihat</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 
 </div>
-
-<!-- QUICK MENU -->
-<div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-10">
-
-    <a href="/proyek" class="bg-white p-6 rounded-lg shadow hover:bg-blue-50">
-        <h4 class="font-semibold mb-2">Kelola Proyek</h4>
-        <p class="text-gray-600 text-sm">Tambah, edit, dan kelola data proyek.</p>
-    </a>
-
-    <a href="/material" class="bg-white p-6 rounded-lg shadow hover:bg-blue-50">
-        <h4 class="font-semibold mb-2">Kelola Material</h4>
-        <p class="text-gray-600 text-sm">Pantau stok material.</p>
-    </a>
-
-    <a href="/equipment" class="bg-white p-6 rounded-lg shadow hover:bg-blue-50">
-        <h4 class="font-semibold mb-2">Kelola Equipment</h4>
-        <p class="text-gray-600 text-sm">Pantau alat proyek.</p>
-    </a>
-
-    <a href="/laporan" class="bg-white p-6 rounded-lg shadow hover:bg-blue-50">
-        <h4 class="font-semibold mb-2">Laporan Proyek</h4>
-        <p class="text-gray-600 text-sm">Lihat laporan lengkap.</p>
-    </a>
-
-</div>
-
-<!-- TABEL PROYEK -->
-<div class="bg-white p-6 rounded-lg shadow">
-
-    <h3 class="text-lg font-semibold mb-4">Daftar Proyek</h3>
-
-    <table class="w-full border-collapse">
-        <thead>
-            <tr class="bg-gray-100 text-left">
-                <th class="p-3 border">Nama Proyek</th>
-                <th class="p-3 border">Lokasi</th>
-                <th class="p-3 border">Progress</th>
-                <th class="p-3 border">Deadline</th>
-                <th class="p-3 border">Aksi</th>
-            </tr>
-        </thead>
-
-        <tbody>
-            <tr>
-                <td class="p-3 border">Pembangunan Ruko A</td>
-                <td class="p-3 border">Jakarta</td>
-                <td class="p-3 border">80%</td>
-                <td class="p-3 border">20 Jan 2025</td>
-                <td class="p-3 border">
-                    <a href="#" class="text-blue-600 hover:underline">Lihat</a>
-                </td>
-            </tr>
-
-            <tr>
-                <td class="p-3 border">Renovasi Gudang B</td>
-                <td class="p-3 border">Bandung</td>
-                <td class="p-3 border">40%</td>
-                <td class="p-3 border">10 Feb 2025</td>
-                <td class="p-3 border">
-                    <a href="#" class="text-blue-600 hover:underline">Lihat</a>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-</div>
-
 @endsection
