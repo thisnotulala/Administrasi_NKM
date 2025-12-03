@@ -12,7 +12,7 @@ class CreatePengeluaransTable extends Migration
             $table->id();
             $table->foreignId('proyek_id')->constrained('proyeks')->onDelete('cascade');
             $table->date('tanggal');
-            $table->string('tipe')->nullable();
+            $table->enum('tipe', ['material', 'operasional', 'gaji'])->default('material');
             $table->bigInteger('jumlah')->unsigned()->default(0);
             $table->text('keterangan')->nullable();
             $table->foreignId('dibuat_oleh')->nullable()->constrained('users')->nullOnDelete();

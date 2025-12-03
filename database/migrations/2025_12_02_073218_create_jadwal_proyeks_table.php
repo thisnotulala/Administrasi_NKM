@@ -11,9 +11,8 @@ class CreateJadwalProyeksTable extends Migration
         Schema::create('jadwal_proyeks', function (Blueprint $table) {
             $table->id();
             $table->foreignId('proyek_id')->constrained('proyeks')->onDelete('cascade');
-            $table->date('tanggal');
-            $table->string('aktivitas');
-            $table->text('keterangan')->nullable();
+            $table->date('tanggal_mulai');
+            $table->date('tanggal_selesai');
             $table->timestamps();
         });
     }

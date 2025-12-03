@@ -63,7 +63,12 @@
                             <p>Kelola Proyek</p>
                         </a>
                     </li>
-
+                <li class="nav-item">
+                    <a href="/jadwal" class="nav-link">
+                        <i class="nav-icon fas fa-calendar-alt"></i>
+                        <p>Jadwal Proyek</p>
+                    </a>
+                </li>
                     <li class="nav-item">
                         <a href="/material" class="nav-link">
                             <i class="nav-icon fas fa-cubes"></i>

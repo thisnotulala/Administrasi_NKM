@@ -11,8 +11,8 @@ class CreateEquipmentsTable extends Migration
         Schema::create('equipments', function (Blueprint $table) {
             $table->id();
             $table->string('nama_equipment');
-            $table->string('kondisi')->nullable();
-            $table->integer('jumlah')->unsigned()->default(0);
+            $table->integer('jumlah')->default(0);
+            $table->string('kondisi')->nullable(); // ← WAJIB karena dipakai di view
             $table->text('keterangan')->nullable();
             $table->timestamps();
         });

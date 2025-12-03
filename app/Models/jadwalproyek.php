@@ -2,8 +2,8 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
 class JadwalProyek extends Model
 {
@@ -11,13 +11,17 @@ class JadwalProyek extends Model
 
     protected $fillable = [
         'proyek_id',
-        'tanggal',
-        'aktivitas',
-        'keterangan',
+        'tanggal_mulai',
+        'tanggal_selesai',
     ];
 
     public function proyek()
     {
         return $this->belongsTo(Proyek::class, 'proyek_id');
+    }
+
+    public function logs()
+    {
+        return $this->hasMany(LogJadwalProyek::class, 'jadwal_id');
     }
 }

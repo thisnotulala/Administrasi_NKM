@@ -3,7 +3,11 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\{
     ProyekController,
-    AuthController
+    AuthController,
+    MaterialController,
+    EquipmentController,
+    PengeluaranController,
+    JadwalProyekController
 
 };
 Route::get('/', function () {
@@ -20,3 +24,12 @@ Route::get('/dashboard', function () {
 Route::get('/dashboard', function () {
     return view('site-manager.dashboard');
 })->middleware('auth');
+
+Route::resource('material', MaterialController::class);
+
+Route::resource('equipment', EquipmentController::class);
+
+Route::resource('pengeluaran', PengeluaranController::class);
+
+Route::resource('jadwal', JadwalProyekController::class);
+

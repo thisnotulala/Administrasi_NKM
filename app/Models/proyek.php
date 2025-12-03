@@ -2,8 +2,8 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
 class Proyek extends Model
 {
@@ -11,11 +11,13 @@ class Proyek extends Model
 
     protected $fillable = [
         'nama_proyek',
-        'deskripsi',
+        'pemilik_proyek',
         'lokasi',
-        'tanggal_mulai',
-        'tanggal_selesai',
+        'nilai_kontrak',
+        'rencana_mulai',
+        'rencana_selesai',
         'status',
+        'deskripsi',
     ];
 
     public function jadwal()
@@ -23,13 +25,13 @@ class Proyek extends Model
         return $this->hasMany(JadwalProyek::class, 'proyek_id');
     }
 
-    public function progress()
-    {
-        return $this->hasMany(Progress::class, 'proyek_id');
-    }
-
     public function pengeluaran()
     {
         return $this->hasMany(Pengeluaran::class, 'proyek_id');
+    }
+
+    public function progress()
+    {
+        return $this->hasMany(Progress::class, 'proyek_id');
     }
 }

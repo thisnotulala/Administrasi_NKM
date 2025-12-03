@@ -10,12 +10,20 @@ class CreateProyeksTable extends Migration
     {
         Schema::create('proyeks', function (Blueprint $table) {
             $table->id();
+
             $table->string('nama_proyek');
-            $table->text('deskripsi')->nullable();
+            $table->string('pemilik_proyek')->nullable();
             $table->string('lokasi')->nullable();
-            $table->date('tanggal_mulai')->nullable();
-            $table->date('tanggal_selesai')->nullable();
-            $table->enum('status', ['berjalan','selesai'])->default('berjalan');
+
+            $table->bigInteger('nilai_kontrak')->nullable(); // pakai bigint
+
+            $table->date('rencana_mulai')->nullable();
+            $table->date('rencana_selesai')->nullable();
+
+            $table->enum('status', ['berjalan','selesai','tertunda'])->default('berjalan');
+
+            $table->text('deskripsi')->nullable();
+
             $table->timestamps();
         });
     }
