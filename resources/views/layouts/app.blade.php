@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title')</title>
 
     <!-- Google Font: Source Sans Pro -->
@@ -10,9 +11,9 @@
 
     <!-- Font Awesome -->
     <link rel="stylesheet"
-          href="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/plugins/fontawesome-free/css/all.min.css">
+          href="https://cdn.jsdelivr.net/npm/admin-lte@3.2/plugins/fontawesome-free/css/all.min.css">
 
-    <!-- AdminLTE -->
+    <!-- AdminLTE CSS - INI YANG DIPERBAIKI -->
     <link rel="stylesheet"
           href="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/css/adminlte.min.css">
 </head>
@@ -57,11 +58,37 @@
                         </a>
                     </li>
 
-                    <li class="nav-item">
-                        <a href="/client" class="nav-link">
-                            <i class="nav-icon fas fa-folder"></i>
-                            <p>Client</p>
+                    <li class="nav-item has-treeview">
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fas fa-boxes"></i>
+                            <p>
+                                Master
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
                         </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="/client" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Client</p>
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a href="/material" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Material</p>
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a href="/satuan" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Satuan</p>
+                                </a>
+                            </li>
+
+                        </ul>
                     </li>
 
                     <li class="nav-item">
@@ -70,16 +97,11 @@
                             <p>Kelola Proyek</p>
                         </a>
                     </li>
-                <li class="nav-item">
-                    <a href="/jadwal" class="nav-link">
-                        <i class="nav-icon fas fa-calendar-alt"></i>
-                        <p>Jadwal Proyek</p>
-                    </a>
-                </li>
+
                     <li class="nav-item">
-                        <a href="/material" class="nav-link">
-                            <i class="nav-icon fas fa-cubes"></i>
-                            <p>Material</p>
+                        <a href="/jadwal" class="nav-link">
+                            <i class="nav-icon fas fa-calendar-alt"></i>
+                            <p>Jadwal Proyek</p>
                         </a>
                     </li>
 
@@ -103,6 +125,35 @@
                             <p>Laporan</p>
                         </a>
                     </li>
+                    <!-- USER MANAGEMENT -->
+                    <li class="nav-item has-treeview">
+                        <a href="/user" class="nav-link">
+                            <i class="nav-icon fas fa-users"></i>
+                            <p>
+                                User Management
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
+                        </a>
+
+                        <ul class="nav nav-treeview">
+
+                            <li class="nav-item">
+                                <a href="/users" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Daftar User</p>
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a href="/users/create" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Tambah User</p>
+                                </a>
+                            </li>
+
+                        </ul>
+                    </li>
+
 
                     <li class="nav-item mt-3">
                         <form action="/logout" method="POST">
