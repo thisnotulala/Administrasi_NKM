@@ -58,6 +58,13 @@
                     </li>
 
                     <li class="nav-item">
+                        <a href="/client" class="nav-link">
+                            <i class="nav-icon fas fa-folder"></i>
+                            <p>Client</p>
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
                         <a href="/proyek" class="nav-link">
                             <i class="nav-icon fas fa-folder"></i>
                             <p>Kelola Proyek</p>

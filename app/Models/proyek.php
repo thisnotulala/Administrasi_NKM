@@ -11,7 +11,7 @@ class Proyek extends Model
 
     protected $fillable = [
         'nama_proyek',
-        'pemilik_proyek',
+        'client_id',
         'lokasi',
         'nilai_kontrak',
         'rencana_mulai',
@@ -19,6 +19,12 @@ class Proyek extends Model
         'status',
         'deskripsi',
     ];
+
+    public function client()
+    {
+        return $this->belongsTo(Client::class);
+    }
+
 
     public function jadwal()
     {

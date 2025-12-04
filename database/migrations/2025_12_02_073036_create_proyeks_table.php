@@ -12,19 +12,17 @@ class CreateProyeksTable extends Migration
             $table->id();
 
             $table->string('nama_proyek');
-            $table->string('pemilik_proyek')->nullable();
+            $table->unsignedBigInteger('client_id')->nullable(); // relasi baru
             $table->string('lokasi')->nullable();
-
-            $table->bigInteger('nilai_kontrak')->nullable(); // pakai bigint
-
+            $table->bigInteger('nilai_kontrak')->nullable();
             $table->date('rencana_mulai')->nullable();
             $table->date('rencana_selesai')->nullable();
-
             $table->enum('status', ['berjalan','selesai','tertunda'])->default('berjalan');
-
             $table->text('deskripsi')->nullable();
 
             $table->timestamps();
+
+            $table->foreign('client_id')->references('id')->on('clients')->onDelete('set null');
         });
     }
 

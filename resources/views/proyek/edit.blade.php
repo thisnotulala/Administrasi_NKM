@@ -32,12 +32,24 @@
                    value="{{ $proyek->nama_proyek }}" required>
         </div>
 
-        {{-- Pemilik Proyek --}}
+        {{-- Client --}}
         <div class="form-group">
-            <label>Pemilik Proyek</label>
-            <input type="text" name="pemilik_proyek" class="form-control"
-                   value="{{ $proyek->pemilik_proyek }}">
+            <label>Client</label>
+            <select name="client_id" class="form-control" disabled>
+                @foreach($clients as $c)
+                    <option value="{{ $c->id }}"
+                        {{ $proyek->client_id == $c->id ? 'selected' : '' }}>
+                        {{ $c->nama_client }}
+                    </option>
+                @endforeach
+            </select>
+
+            {{-- Karena select di-disable TIDAK terkirim ke server,
+                wajib buat input hidden --}}
+            <input type="hidden" name="client_id" value="{{ $proyek->client_id }}">
         </div>
+
+
 
         {{-- Lokasi --}}
         <div class="form-group">
@@ -53,25 +65,19 @@
                    value="{{ $proyek->nilai_kontrak }}">
         </div>
 
-        {{-- Durasi Rencana --}}
-        <div class="form-group">
-            <label>Durasi Rencana (Hari)</label>
-            <input type="number" name="durasi_rencana" class="form-control"
-                   value="{{ $proyek->durasi_rencana }}">
-        </div>
 
         {{-- Tanggal Mulai --}}
         <div class="form-group">
             <label>Tanggal Mulai</label>
-            <input type="date" name="tanggal_mulai" class="form-control"
-                   value="{{ $proyek->tanggal_mulai }}">
+            <input type="date" name="rencana_mulai" class="form-control"
+                   value="{{ $proyek->rencana_mulai }}">
         </div>
 
         {{-- Tanggal Selesai --}}
         <div class="form-group">
             <label>Tanggal Selesai</label>
-            <input type="date" name="tanggal_selesai" class="form-control"
-                   value="{{ $proyek->tanggal_selesai }}">
+            <input type="date" name="rencana_selesai" class="form-control"
+                   value="{{ $proyek->rencana_selesai }}">
         </div>
 
         {{-- Status --}}

@@ -3,6 +3,9 @@
 @section('title', 'Tambah Proyek')
 
 @section('content')
+@php
+$clients = \App\Models\Client::all();
+@endphp
 
 <h3>Tambah Proyek</h3>
 
@@ -16,9 +19,15 @@
         </div>
 
         <div class="form-group">
-            <label>Pemilik Proyek</label>
-            <input type="text" name="pemilik_proyek" class="form-control">
+            <label>Client</label>
+            <select name="client_id" class="form-control" required>
+                <option value="">-- Pilih Client --</option>
+                @foreach($clients as $c)
+                    <option value="{{ $c->id }}">{{ $c->nama_client }}</option>
+                @endforeach
+            </select>
         </div>
+
 
         <div class="form-group">
             <label>Lokasi</label>
@@ -60,3 +69,4 @@
     </form>
 </div>
 @endsection
+

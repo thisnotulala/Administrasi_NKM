@@ -7,7 +7,8 @@ use App\Http\Controllers\{
     MaterialController,
     EquipmentController,
     PengeluaranController,
-    JadwalProyekController
+    JadwalProyekController,
+    ClientController
 
 };
 Route::get('/', function () {
@@ -33,3 +34,4 @@ Route::resource('pengeluaran', PengeluaranController::class);
 
 Route::resource('jadwal', JadwalProyekController::class);
 
+Route::resource('client', ClientController::class);

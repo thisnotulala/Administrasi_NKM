@@ -23,7 +23,7 @@
                 <tr>
                     <th>#</th>
                     <th>Nama Proyek</th>
-                    <th>Pemilik</th>
+                    <th>Client</th>
                     <th>Lokasi</th>
                     <th>Nilai Kontrak</th>
                     <th>Status</th>
@@ -36,7 +36,7 @@
                 <tr>
                     <td>{{ $loop->iteration }}</td>
                     <td>{{ $p->nama_proyek }}</td>
-                    <td>{{ $p->pemilik_proyek }}</td>
+                    <td>{{ $p->client->nama_client }}</td>
                     <td>{{ $p->lokasi }}</td>
                     <td>Rp {{ number_format($p->nilai_kontrak,0,',','.') }}</td>
                     <td>

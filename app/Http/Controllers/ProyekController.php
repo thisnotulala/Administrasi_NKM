@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Proyek;
 use Illuminate\Http\Request;
+use App\Models\Client;
 
 class ProyekController extends Controller
 {
@@ -15,14 +16,15 @@ class ProyekController extends Controller
 
     public function create()
     {
-        return view('proyek.create');
+        $clients = Client::all();
+        return view('proyek.create', compact('clients'));
     }
 
     public function store(Request $request)
     {
         $request->validate([
             'nama_proyek' => 'required|string|max:255',
-            'pemilik_proyek' => 'nullable|string|max:255',
+            'nama_client' => 'nullable|string|max:255',
             'lokasi' => 'nullable|string|max:255',
             'nilai_kontrak' => 'nullable|numeric',
             'rencana_mulai' => 'nullable|date',
@@ -42,14 +44,16 @@ class ProyekController extends Controller
 
     public function edit(Proyek $proyek)
     {
-        return view('proyek.edit', compact('proyek'));
+        $clients = Client::all();
+        return view('proyek.edit', compact('proyek','clients'));
     }
+
 
     public function update(Request $request, Proyek $proyek)
     {
         $request->validate([
             'nama_proyek' => 'required|string|max:255',
-            'pemilik_proyek' => 'nullable|string|max:255',
+            'nama_client' => 'nullable|string|max:255',
             'lokasi' => 'nullable|string|max:255',
             'nilai_kontrak' => 'nullable|numeric',
             'rencana_mulai' => 'nullable|date',
