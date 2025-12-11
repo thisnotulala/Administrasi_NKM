@@ -58,39 +58,6 @@
                         </a>
                     </li>
 
-                    <li class="nav-item has-treeview">
-                        <a href="#" class="nav-link">
-                            <i class="nav-icon fas fa-boxes"></i>
-                            <p>
-                                Master
-                                <i class="right fas fa-angle-left"></i>
-                            </p>
-                        </a>
-                        <ul class="nav nav-treeview">
-                            <li class="nav-item">
-                                <a href="/client" class="nav-link">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>Client</p>
-                                </a>
-                            </li>
-
-                            <li class="nav-item">
-                                <a href="/material" class="nav-link">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>Material</p>
-                                </a>
-                            </li>
-
-                            <li class="nav-item">
-                                <a href="/satuan" class="nav-link">
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>Satuan</p>
-                                </a>
-                            </li>
-
-                        </ul>
-                    </li>
-
                     <li class="nav-item">
                         <a href="/proyek" class="nav-link">
                             <i class="nav-icon fas fa-folder"></i>
@@ -125,9 +92,10 @@
                             <p>Laporan</p>
                         </a>
                     </li>
+
                     <!-- USER MANAGEMENT -->
                     <li class="nav-item has-treeview">
-                        <a href="/user" class="nav-link">
+                        <a href="#" class="nav-link">
                             <i class="nav-icon fas fa-users"></i>
                             <p>
                                 User Management
@@ -154,7 +122,6 @@
                         </ul>
                     </li>
 
-
                     <li class="nav-item mt-3">
                         <form action="/logout" method="POST">
                             @csrf
@@ -163,6 +130,11 @@
                             </button>
                         </form>
                     </li>
+
+
+                        </ul>
+                    </li>
+
 
                 </ul>
             </nav>

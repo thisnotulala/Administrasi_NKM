@@ -47,7 +47,7 @@ class PengeluaranController extends Controller
 
     public function show($id)
     {
-        $pengeluaran = Pengeluaran::findOrFail($id);
+        $pengeluaran = Pengeluaran::with(['proyek', 'user'])->findOrFail($id);
         return view('pengeluaran.show', compact('pengeluaran'));
     }
 
@@ -55,7 +55,8 @@ class PengeluaranController extends Controller
     {
         $pengeluaran = Pengeluaran::findOrFail($id);
         $proyek = Proyek::all();
-        return view('pengeluaran.edit', compact('pengeluaran','proyek'));
+
+        return view('pengeluaran.edit', compact('pengeluaran', 'proyek'));
     }
 
     public function update(Request $request, $id)

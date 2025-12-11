@@ -2,40 +2,42 @@
 
 @section('title', 'Detail Pengeluaran')
 
-@section('content_header')
-    <h1>Detail Pengeluaran</h1>
-@stop
-
 @section('content')
-
 <div class="card p-4">
-
     <table class="table">
+
         <tr>
-            <th>Proyek</th><td>{{ $p->proyek->nama_proyek }}</td>
+            <th>Proyek</th>
+            <td>{{ $pengeluaran->proyek->nama_proyek ?? '-' }}</td>
         </tr>
+
         <tr>
-            <th>Tanggal</th><td>{{ $p->tanggal }}</td>
+            <th>Tanggal</th>
+            <td>{{ \Carbon\Carbon::parse($pengeluaran->tanggal)->format('d-m-Y') }}</td>
         </tr>
+
         <tr>
-            <th>Kategori</th><td>{{ $p->kategori }}</td>
+            <th>Tipe</th>
+            <td>{{ $pengeluaran->tipe }}</td>
         </tr>
+
         <tr>
-            <th>Jenis / Tipe</th><td>{{ $p->tipe }}</td>
+            <th>Jumlah</th>
+            <td>Rp {{ number_format($pengeluaran->jumlah, 0, ',', '.') }}</td>
         </tr>
+
         <tr>
-            <th>Jumlah</th><td>Rp {{ number_format($p->jumlah) }}</td>
+            <th>Keterangan</th>
+            <td>{{ $pengeluaran->keterangan ?? '-' }}</td>
         </tr>
+
         <tr>
-            <th>Keterangan</th><td>{{ $p->keterangan }}</td>
+            <th>Dibuat Oleh</th>
+            <td>{{ $pengeluaran->user->name ?? '-' }}</td>
         </tr>
-        <tr>
-            <th>Dibuat Oleh</th><td>{{ $p->user->name ?? '-' }}</td>
-        </tr>
+
     </table>
 
     <a href="{{ route('pengeluaran.index') }}" class="btn btn-secondary mt-3">Kembali</a>
-
 </div>
-
-@stop
+@endsection
