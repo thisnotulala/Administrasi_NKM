@@ -17,4 +17,12 @@ class Sdm extends Model
         'kontak',
         'keterangan',
     ];
+
+    public function proyeks()
+    {
+        return $this->belongsToMany(Proyek::class, 'proyek_sdm')
+                    ->withPivot('peran', 'tanggal_mulai', 'tanggal_selesai')
+                    ->withTimestamps();
+    }
+
 }

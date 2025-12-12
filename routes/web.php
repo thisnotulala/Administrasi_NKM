@@ -10,13 +10,19 @@
         JadwalProyekController,
         ClientController,
         UserController,
-        ProgressController
+        ProgressController,
+        SdmController
 
 
     };
     Route::get('/', function () {
         return view('welcome');
     });
+    // assign SDM
+    Route::get('/proyek/{id}/assign/create', [ProyekController::class, 'assignCreate'])->name('proyek.assign.create');
+    Route::post('/proyek/{id}/assign', [ProyekController::class, 'assignStore'])->name('proyek.assign.store');
+    Route::delete('/proyek/{proyek_id}/assign/{sdm_id}', [ProyekController::class, 'assignDelete'])->name('proyek.assign.destroy');
+
     Route::resource('proyek', ProyekController::class);
     Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
     Route::post('/login', [AuthController::class, 'login']);
@@ -45,3 +51,5 @@
     
 
     Route::resource('progress', ProgressController::class);
+
+    Route::resource('sdm', SdmController::class);

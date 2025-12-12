@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Proyek;
 use Illuminate\Http\Request;
 use App\Models\Client;
-
+use App\Models\Sdm;
 class ProyekController extends Controller
 {
     public function index()
@@ -39,7 +39,8 @@ class ProyekController extends Controller
 
     public function show(Proyek $proyek)
     {
-        return view('proyek.show', compact('proyek'));
+        $sdms = \App\Models\Sdm::all();
+        return view('proyek.show', compact('proyek','sdms'));
     }
 
     public function edit(Proyek $proyek)
@@ -71,4 +72,47 @@ class ProyekController extends Controller
         $proyek->delete();
         return redirect()->route('proyek.index')->with('success', 'Proyek berhasil dihapus!');
     }
+    public function assignCreate($proyek_id)
+    {
+        $proyek = Proyek::findOrFail($proyek_id);
+        $sdms = Sdm::all();
+
+        return view('proyek.assign.create', compact('proyek', 'sdms'));
+    }
+    public function assignStore(Request $request, $id)
+    {
+        $request->validate([
+            'sdm_id' => 'required|exists:sdms,id',
+            'tanggal_mulai' => 'nullable|date',
+            'tanggal_selesai' => 'nullable|date',
+        ]);
+
+        $proyek = Proyek::findOrFail($id);
+
+        // prevent duplicate assignment
+        if ($proyek->sdms()->where('sdm_id', $request->sdm_id)->exists()) {
+            return back()->with('error', 'SDM sudah diassign ke proyek ini.');
+        }
+
+        $sdm = Sdm::findOrFail($request->sdm_id);
+
+
+        $proyek->sdms()->attach($request->sdm_id, [
+            'peran' => $sdm->jabatan, // BENAR → ambil jabatan SDM
+            'tanggal_mulai' => $request->tanggal_mulai,
+            'tanggal_selesai' => $request->tanggal_selesai
+        ]);
+
+        return back()->with('success', 'SDM berhasil ditambahkan ke proyek.');
+    }
+
+    public function assignDelete($proyek_id, $sdm_id)
+    {
+        $proyek = Proyek::findOrFail($proyek_id);
+
+        $proyek->sdms()->detach($sdm_id);
+
+        return back()->with('success', 'SDM berhasil dihapus dari proyek.');
+    }
+
 }

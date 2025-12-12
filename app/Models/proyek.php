@@ -39,5 +39,11 @@ class Proyek extends Model
     {
         return $this->hasMany(Progress::class);
     }
+    public function sdms()
+    {
+        return $this->belongsToMany(Sdm::class, 'proyek_sdm')
+                    ->withPivot('peran', 'tanggal_mulai', 'tanggal_selesai')
+                    ->withTimestamps();
+    }
 
 }
