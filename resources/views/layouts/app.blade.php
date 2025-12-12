@@ -85,16 +85,19 @@
                             <p>Pengeluaran</p>
                         </a>
                     </li>
-
+                    <li class="nav-item">
+                        <a href="/progress" class="nav-link">
+                            <i class="nav-icon fas fa-money-bill"></i>
+                            <p>Progress</p>
+                        </a>
+                    </li>
                     <li class="nav-item">
                         <a href="/laporan" class="nav-link">
                             <i class="nav-icon fas fa-file-alt"></i>
                             <p>Laporan</p>
                         </a>
                     </li>
-
-                    <!-- USER MANAGEMENT -->
-                    <li class="nav-item has-treeview">
+                    <!-- <li class="nav-item has-treeview">
                         <a href="#" class="nav-link">
                             <i class="nav-icon fas fa-users"></i>
                             <p>
@@ -120,7 +123,7 @@
                             </li>
 
                         </ul>
-                    </li>
+                    </li> -->
 
                     <li class="nav-item mt-3">
                         <form action="/logout" method="POST">
@@ -155,6 +158,15 @@
 <script src="https://cdn.jsdelivr.net/npm/admin-lte@3.2/plugins/jquery/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/admin-lte@3.2/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/js/adminlte.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</div> {{-- content --}}
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
 
 </body>
 </html>

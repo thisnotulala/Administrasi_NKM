@@ -35,9 +35,9 @@ class Proyek extends Model
     {
         return $this->hasMany(Pengeluaran::class, 'proyek_id');
     }
-
     public function progress()
     {
-        return $this->hasMany(Progress::class, 'proyek_id');
+        return $this->hasMany(Progress::class);
     }
+
 }
