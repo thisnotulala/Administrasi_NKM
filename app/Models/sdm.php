@@ -16,6 +16,7 @@ class Sdm extends Model
         'jabatan',
         'kontak',
         'keterangan',
+        'status_ketersediaan',
     ];
 
     public function proyeks()

@@ -24,10 +24,10 @@ class ProgressController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'proyek_id' => 'required',
-            'persentase' => 'required|integer|min:0|max:100',
-            'keterangan' => 'nullable',
-            'foto' => 'nullable|image|mimes:jpg,png,jpeg|max:2048',
+            'proyek_id'   => 'required',
+            'persentase'  => 'required|integer|min:0|max:100',
+            'keterangan'  => 'nullable',
+            'foto'        => 'nullable|image|mimes:jpg,png,jpeg|max:2048',
         ]);
 
         $foto = null;
@@ -36,11 +36,11 @@ class ProgressController extends Controller
         }
 
         Progress::create([
-            'proyek_id' => $request->proyek_id,
-            'persentase' => $request->persentase,
-            'keterangan' => $request->keterangan,
-            'foto' => $foto,
-            'validasi' => 'tidak valid', // default saat dibuat
+            'proyek_id'   => $request->proyek_id,
+            'persentase'  => $request->persentase,
+            'keterangan'  => $request->keterangan,
+            'foto'        => $foto,
+            'validasi'    => 'tidak valid',
             'dibuat_oleh' => Auth::id(),
         ]);
 
@@ -53,12 +53,17 @@ class ProgressController extends Controller
         return view('progress.show', compact('p'));
     }
 
-    /** -----------------------------
-     * VALIDASI (ACC)
-     * ----------------------------- */
+    /* ======================
+       ACC PROGRESS
+    ====================== */
     public function validateProgress($id)
     {
         $p = Progress::findOrFail($id);
+
+        if ($p->validasi === 'valid') {
+            return back()->with('info', 'Progress sudah disetujui.');
+        }
+
         $p->update([
             'validasi' => 'valid'
         ]);
@@ -66,9 +71,9 @@ class ProgressController extends Controller
         return back()->with('success', 'Progress berhasil disetujui');
     }
 
-    /** -----------------------------
-     * TOLAK + ALASAN REVISI
-     * ----------------------------- */
+    /* ======================
+       TOLAK PROGRESS
+    ====================== */
     public function revisiProgress(Request $request, $id)
     {
         $request->validate([
@@ -76,9 +81,14 @@ class ProgressController extends Controller
         ]);
 
         $p = Progress::findOrFail($id);
+
+        if ($p->validasi === 'valid') {
+            return back()->with('info', 'Progress yang sudah disetujui tidak bisa ditolak.');
+        }
+
         $p->update([
             'validasi' => 'tidak valid',
-            'alasan' => $request->alasan
+            'alasan'   => $request->alasan
         ]);
 
         return back()->with('warning', 'Progress ditolak dan diminta revisi');
