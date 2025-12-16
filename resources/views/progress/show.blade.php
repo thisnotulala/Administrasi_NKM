@@ -13,13 +13,16 @@
 
         @if($p->foto)
             <p><strong>Foto:</strong></p>
-            <img src="{{ asset('storage/'.$p->foto) }}" width="300" class="img-thumbnail">
+            <img src="{{ asset('storage/'.$p->foto) }}"
+                class="img-thumbnail"
+                style="max-width:300px">
         @else
             <p><em>Tidak ada foto</em></p>
         @endif
+
         
-        @if($p->validasi == 'tidak valid')
-            <p><strong>Alasan Penolakan:</strong> {{ $p->alasan ?? '-' }}</p>
+        @if($p->validasi === 'ditolak')
+            <p><strong>Alasan Penolakan:</strong> {{ $p->alasan }}</p>
         @endif
 
 

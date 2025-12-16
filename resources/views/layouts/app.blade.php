@@ -92,8 +92,8 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="/laporan" class="nav-link">
-                            <i class="nav-icon fas fa-file-alt"></i>
+                         <a href="{{ route('laporan.index') }}" class="nav-link">
+                            <i class="fas fa-file-alt"></i>
                             <p>Laporan</p>
                         </a>
                     </li>

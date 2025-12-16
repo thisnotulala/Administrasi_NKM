@@ -28,6 +28,7 @@ class ProgressController extends Controller
             'persentase'  => 'required|integer|min:0|max:100',
             'keterangan'  => 'nullable',
             'foto'        => 'nullable|image|mimes:jpg,png,jpeg|max:2048',
+            'validasi' => 'pending',
         ]);
 
         $foto = null;
@@ -40,7 +41,7 @@ class ProgressController extends Controller
             'persentase'  => $request->persentase,
             'keterangan'  => $request->keterangan,
             'foto'        => $foto,
-            'validasi'    => 'tidak valid',
+            'validasi'    => 'pending',
             'dibuat_oleh' => Auth::id(),
         ]);
 
@@ -85,11 +86,11 @@ class ProgressController extends Controller
         if ($p->validasi === 'valid') {
             return back()->with('info', 'Progress yang sudah disetujui tidak bisa ditolak.');
         }
-
         $p->update([
-            'validasi' => 'tidak valid',
+            'validasi' => 'ditolak',
             'alasan'   => $request->alasan
         ]);
+
 
         return back()->with('warning', 'Progress ditolak dan diminta revisi');
     }

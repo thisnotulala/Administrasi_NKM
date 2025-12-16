@@ -11,7 +11,8 @@
         ClientController,
         UserController,
         ProgressController,
-        SdmController
+        SdmController,
+        LaporanController,
 
 
     };
@@ -53,3 +54,6 @@
     Route::resource('progress', ProgressController::class);
 
     Route::resource('sdm', SdmController::class);
+
+    Route::get('/laporan', [LaporanController::class, 'index'])->name('laporan.index');
+    Route::get('/laporan/{proyek}', [LaporanController::class, 'show'])->name('laporan.show');

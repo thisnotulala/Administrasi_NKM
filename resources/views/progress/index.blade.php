@@ -9,7 +9,7 @@
     </div>
 
     <div class="card-body">
-        <table class="table">
+        <table class="table table-bordered">
             <thead>
                 <tr>
                     <th>Proyek</th>
@@ -30,6 +30,8 @@
                     <td>
                         @if($p->validasi === 'valid')
                             <span class="badge badge-success">Valid</span>
+                        @elseif($p->validasi === 'ditolak')
+                            <span class="badge badge-danger">Ditolak</span>
                         @else
                             <span class="badge badge-warning">Menunggu</span>
                         @endif
@@ -38,15 +40,16 @@
                     {{-- AKSI --}}
                     <td>
                         <a href="{{ route('progress.show', $p->id) }}"
-                        class="btn btn-info btn-sm">Detail</a>
+                           class="btn btn-info btn-sm">Detail</a>
 
-                        {{-- TOMBOL HANYA MUNCUL JIKA BELUM VALID --}}
-                        @if($p->validasi === 'tidak valid')
+                        {{-- TOMBOL HANYA SAAT PENDING --}}
+                        @if($p->validasi === 'pending')
 
                             <form action="{{ route('progress.validate', $p->id) }}"
-                                method="POST" class="d-inline">
+                                  method="POST" class="d-inline">
                                 @csrf
-                                <button class="btn btn-success btn-sm">
+                                <button class="btn btn-success btn-sm"
+                                    onclick="return confirm('Yakin ACC progress ini?')">
                                     ✔ ACC
                                 </button>
                             </form>
@@ -60,12 +63,12 @@
                         @endif
                     </td>
 
-
                     {{-- ALASAN --}}
                     <td>{{ $p->alasan ?? '-' }}</td>
                 </tr>
 
-                {{-- MODAL REVISI --}}
+                {{-- MODAL TOLAK (HANYA PENDING) --}}
+                @if($p->validasi === 'pending')
                 <div class="modal fade" id="revisiModal{{ $p->id }}" tabindex="-1">
                     <div class="modal-dialog">
                         <div class="modal-content">
@@ -81,18 +84,21 @@
                                 <div class="modal-body">
                                     <label>Alasan Penolakan</label>
                                     <textarea name="alasan" class="form-control"
-                                              rows="3" required></textarea>
+                                        rows="3" required></textarea>
                                 </div>
 
                                 <div class="modal-footer">
                                     <button class="btn btn-secondary"
-                                            data-dismiss="modal">Batal</button>
-                                    <button class="btn btn-danger">Kirim Revisi</button>
+                                        data-dismiss="modal">Batal</button>
+                                    <button class="btn btn-danger">
+                                        Kirim Penolakan
+                                    </button>
                                 </div>
                             </form>
                         </div>
                     </div>
                 </div>
+                @endif
 
                 @endforeach
             </tbody>

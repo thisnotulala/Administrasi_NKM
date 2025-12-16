@@ -12,8 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('progress', function (Blueprint $table) {
-            $table->enum('validasi', ['valid', 'tidak valid'])
-                  ->default('tidak valid')
+            $table->enum('validasi', ['valid', 'ditolak','pending'])
+                  ->default('pending')
                   ->after('keterangan');
         });
     }
