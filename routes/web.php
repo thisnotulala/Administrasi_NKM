@@ -23,8 +23,6 @@
     Route::get('/proyek/{id}/assign/create', [ProyekController::class, 'assignCreate'])->name('proyek.assign.create');
     Route::post('/proyek/{id}/assign', [ProyekController::class, 'assignStore'])->name('proyek.assign.store');
     Route::delete('/proyek/{proyek_id}/assign/{sdm_id}', [ProyekController::class, 'assignDelete'])->name('proyek.assign.destroy');
-
-    Route::resource('proyek', ProyekController::class);
     Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
     Route::post('/login', [AuthController::class, 'login']);
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
@@ -49,11 +47,14 @@
     Route::resource('user', UserController::class);
     Route::post('/progress/{id}/validasi', [ProgressController::class, 'validateProgress'])->name('progress.validate');
     Route::post('/progress/{id}/revisi', [ProgressController::class, 'revisiProgress'])->name('progress.revisi');
-    
-
     Route::resource('progress', ProgressController::class);
-
     Route::resource('sdm', SdmController::class);
-
     Route::get('/laporan', [LaporanController::class, 'index'])->name('laporan.index');
     Route::get('/laporan/{proyek}', [LaporanController::class, 'show'])->name('laporan.show');
+    Route::get('/proyek/export-pdf',
+    [ProyekController::class, 'exportAllAssignPdf'])->name('proyek.export.pdf');
+
+    // RESOURCE PROYEK
+    Route::resource('proyek', ProyekController::class);
+
+

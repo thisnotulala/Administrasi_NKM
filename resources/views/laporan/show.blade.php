@@ -9,53 +9,78 @@
 
     <div class="card-body">
 
-        {{-- PROGRESS --}}
+        {{-- ================= PROGRESS ================= --}}
         <h5>Progress Pekerjaan</h5>
         <table class="table table-sm table-bordered">
-            <tr>
-                <th>Tanggal</th>
-                <th>Progress (%)</th>
-                <th>Status</th>
-            </tr>
-            @foreach($progress as $p)
-            <tr>
-                <td>{{ $p->created_at->format('d-m-Y') }}</td>
-                <td>{{ $p->persentase }}%</td>
-                <td>{{ ucfirst($p->validasi) }}</td>
-            </tr>
-            @endforeach
+            <thead>
+                <tr>
+                    <th>Tanggal</th>
+                    <th>Progress (%)</th>
+                    <th>Keterangan</th>
+                </tr>
+            </thead>
+            <tbody>
+                @forelse($progress as $p)
+                <tr>
+                    <td>{{ $p->created_at->format('d-m-Y') }}</td>
+                    <td>{{ $p->persentase }}%</td>
+                    <td>{{ $p->keterangan ?? '-' }}</td>
+                </tr>
+                @empty
+                <tr>
+                    <td colspan="3" class="text-center">Belum ada data progress</td>
+                </tr>
+                @endforelse
+            </tbody>
         </table>
 
-        {{-- PENGELUARAN --}}
+
+        {{-- ================= PENGELUARAN ================= --}}
         <h5 class="mt-4">Pengeluaran</h5>
         <table class="table table-sm table-bordered">
-            <tr>
-                <th>Tanggal</th>
-                <th>Jenis</th>
-                <th>Jumlah</th>
-            </tr>
-            @foreach($pengeluaran as $x)
-            <tr>
-                <td>{{ $x->tanggal }}</td>
-                <td>{{ $x->jenis }}</td>
-                <td>Rp {{ number_format($x->jumlah) }}</td>
-            </tr>
-            @endforeach
+            <thead>
+                <tr>
+                    <th>Tanggal</th>
+                    <th>Tipe</th>
+                    <th>Jumlah</th>
+                </tr>
+            </thead>
+            <tbody>
+                @forelse($pengeluaran as $x)
+                <tr>
+                    <td>{{ \Carbon\Carbon::parse($x->tanggal)->format('d-m-Y') }}</td>
+                    <td>{{ $x->tipe }}</td>
+                    <td>Rp {{ number_format($x->jumlah, 0, ',', '.') }}</td>
+                </tr>
+                @empty
+                <tr>
+                    <td colspan="3" class="text-center">Tidak ada data pengeluaran</td>
+                </tr>
+                @endforelse
+            </tbody>
         </table>
 
-        {{-- SDM --}}
+        {{-- ================= SDM ================= --}}
         <h5 class="mt-4">SDM Terlibat</h5>
         <table class="table table-sm table-bordered">
-            <tr>
-                <th>Nama</th>
-                <th>Jabatan</th>
-            </tr>
-            @foreach($sdm as $s)
-            <tr>
-                <td>{{ $s->nama }}</td>
-                <td>{{ $s->jabatan }}</td>
-            </tr>
-            @endforeach
+            <thead>
+                <tr>
+                    <th>Nama</th>
+                    <th>Jabatan</th>
+                </tr>
+            </thead>
+            <tbody>
+                @forelse($sdm as $s)
+                <tr>
+                    <td>{{ $s->nama }}</td>
+                    <td>{{ $s->jabatan }}</td>
+                </tr>
+                @empty
+                <tr>
+                    <td colspan="2" class="text-center">Belum ada SDM</td>
+                </tr>
+                @endforelse
+            </tbody>
         </table>
 
     </div>

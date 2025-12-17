@@ -6,10 +6,18 @@
 
 <div class="d-flex justify-content-between mb-3">
     <h3>Data Proyek</h3>
-    <a href="{{ route('proyek.create') }}" class="btn btn-primary">
-        <i class="fas fa-plus"></i> Tambah Proyek
-    </a>
+
+    <div>
+        <a href="{{ route('proyek.export.pdf') }}"class="btn btn-danger">
+            <i class="fas fa-file-pdf"></i> Export Proyek
+        </a>
+
+        <a href="{{ route('proyek.create') }}" class="btn btn-primary">
+            <i class="fas fa-plus"></i> Tambah Proyek
+        </a>
+    </div>
 </div>
+
 
 @if(session('success'))
     <div class="alert alert-success">{{ session('success') }}</div>

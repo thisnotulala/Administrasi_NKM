@@ -6,6 +6,7 @@ use App\Models\Proyek;
 use App\Models\Client;
 use App\Models\Sdm;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class ProyekController extends Controller
 {
@@ -178,4 +179,21 @@ class ProyekController extends Controller
             ->route('proyek.show', $proyek_id)
             ->with('success', 'SDM berhasil dihapus dari proyek.');
     }
+    /* =======================
+       EXPORT PDF
+    ======================= */
+    public function exportAllAssignPdf()
+    {
+        $proyeks = Proyek::with('sdms')->get();
+
+        $pdf = Pdf::loadView(
+            'proyek.export-all-pdf',
+            compact('proyeks')
+        );
+
+        return $pdf->download('laporan-semua-proyek.pdf');
+    }
+
+
+
 }
