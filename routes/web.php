@@ -54,6 +54,24 @@
     Route::get('/proyek/export-pdf',
     [ProyekController::class, 'exportAllAssignPdf'])->name('proyek.export.pdf');
 
+    Route::get('/laporan/{proyek}/export-pdf', 
+    [LaporanController::class, 'exportPdf']
+    )->name('laporan.export.pdf');
+
+    Route::get('/equipment/export/pdf', [EquipmentController::class, 'exportPdf'])
+    ->name('equipment.export.pdf');
+
+    Route::get('/pengeluaran/export/pdf', [PengeluaranController::class, 'exportPdf'])
+    ->name('pengeluaran.export.pdf');
+
+    Route::get('/progress/export/pdf', [ProgressController::class, 'exportPdf'])
+    ->name('progress.export.pdf');
+
+    Route::get('/sdm/export/pdf', [SdmController::class, 'exportPdf'])
+    ->name('sdm.export.pdf');
+
+
+
     // RESOURCE PROYEK
     Route::resource('proyek', ProyekController::class);
 

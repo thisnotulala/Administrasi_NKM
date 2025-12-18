@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Barryvdh\DomPDF\Facade\Pdf;
 use App\Models\Sdm;
 use App\Models\Proyek;
 use Illuminate\Http\Request;
@@ -133,4 +134,15 @@ class SdmController extends Controller
 
         return back()->with('success','Penugasan berhasil dihapus');
     }
+
+    public function exportPdf()
+    {
+        $sdm = Sdm::with('proyeks')->orderBy('nama')->get();
+
+        $pdf = Pdf::loadView('sdm.pdf', compact('sdm'))
+                ->setPaper('A4', 'portrait');
+
+        return $pdf->download('laporan-sdm.pdf');
+    }
+
 }

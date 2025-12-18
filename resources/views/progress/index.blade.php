@@ -5,8 +5,17 @@
 <div class="card">
     <div class="card-header d-flex justify-content-between">
         <h4>Data Progress</h4>
-        <a href="/progress/create" class="btn btn-primary">Tambah Progress</a>
+        
+        <div>
+            <a href="{{ route('progress.export.pdf') }}" class="btn btn-danger">
+                <i class="fas fa-file-pdf"></i> Export PDF
+            </a>
+
+            <a href="/progress/create" class="btn btn-primary">
+                Tambah Progress
+            </a>
     </div>
+</div>
 
     <div class="card-body">
         <table class="table table-bordered">

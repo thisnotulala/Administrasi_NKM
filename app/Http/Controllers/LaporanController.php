@@ -5,8 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Proyek;
 use App\Models\Progress;
 use App\Models\Pengeluaran;
-use App\Models\Sdm;
-use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class LaporanController extends Controller
 {
@@ -17,12 +16,12 @@ class LaporanController extends Controller
         return view('laporan.index', compact('proyeks'));
     }
 
-    // LAPORAN PER PROYEK
+    // TAMPILAN LAPORAN (WEB)
     public function show(Proyek $proyek)
     {
-        $progress = Progress::where('proyek_id', $proyek->id)->get();
-        $pengeluaran = Pengeluaran::where('proyek_id', $proyek->id)->get();
-        $sdm = $proyek->sdms; // relasi many-to-many
+        $progress     = Progress::where('proyek_id', $proyek->id)->get();
+        $pengeluaran  = Pengeluaran::where('proyek_id', $proyek->id)->get();
+        $sdm          = $proyek->sdms;
 
         return view('laporan.show', compact(
             'proyek',
@@ -30,5 +29,24 @@ class LaporanController extends Controller
             'pengeluaran',
             'sdm'
         ));
+    }
+
+    // EXPORT PDF LAPORAN PROYEK
+    public function exportPdf(Proyek $proyek)
+    {
+        $progress     = Progress::where('proyek_id', $proyek->id)->get();
+        $pengeluaran  = Pengeluaran::where('proyek_id', $proyek->id)->get();
+        $sdm          = $proyek->sdms;
+
+        $pdf = Pdf::loadView('laporan.export-pdf', compact(
+            'proyek',
+            'progress',
+            'pengeluaran',
+            'sdm'
+        ));
+
+        return $pdf->download(
+            'Laporan_Proyek_' . $proyek->nama_proyek . '.pdf'
+        );
     }
 }

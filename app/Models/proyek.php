@@ -45,5 +45,6 @@ class Proyek extends Model
                     ->withPivot('peran', 'tanggal_mulai', 'tanggal_selesai')
                     ->withTimestamps();
     }
+    
 
 }

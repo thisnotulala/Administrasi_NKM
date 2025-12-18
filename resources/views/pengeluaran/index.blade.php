@@ -17,6 +17,9 @@
         <a href="{{ route('pengeluaran.create') }}" class="btn btn-primary">
             <i class="fas fa-plus"></i> Tambah Pengeluaran
         </a>
+        <a href="{{ route('pengeluaran.export.pdf') }}" class="btn btn-danger float-right">
+            <i class="fas fa-file-pdf"></i> Export PDF
+        </a>
     </div>
 
     <div class="card-body">

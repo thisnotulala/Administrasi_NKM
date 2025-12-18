@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Barryvdh\DomPDF\Facade\Pdf;
 use App\Models\Equipment;
 use Illuminate\Http\Request;
 
@@ -61,5 +62,15 @@ class EquipmentController extends Controller
         Equipment::destroy($id);
 
         return redirect()->route('equipment.index')->with('success', 'Equipment berhasil dihapus!');
+    }
+
+    public function exportPdf()
+    {
+        $equipment = Equipment::all();
+
+        $pdf = Pdf::loadView('equipment.pdf', compact('equipment'))
+                ->setPaper('A4', 'portrait');
+
+        return $pdf->download('laporan-equipment.pdf');
     }
 }

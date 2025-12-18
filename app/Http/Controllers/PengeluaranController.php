@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Barryvdh\DomPDF\Facade\Pdf;
 use App\Models\Pengeluaran;
 use App\Models\Proyek;
 use Illuminate\Http\Request;
@@ -83,4 +84,19 @@ class PengeluaranController extends Controller
         return redirect()->route('pengeluaran.index')
             ->with('success', 'Data pengeluaran berhasil dihapus');
     }
+
+    public function exportPdf()
+    {
+        $pengeluaran = Pengeluaran::with(['proyek', 'user'])
+            ->orderBy('tanggal', 'DESC')
+            ->get();
+
+        $total = $pengeluaran->sum('jumlah');
+
+        $pdf = Pdf::loadView('pengeluaran.pdf', compact('pengeluaran', 'total'))
+                ->setPaper('A4', 'landscape');
+
+        return $pdf->download('laporan-pengeluaran.pdf');
+    }
+
 }

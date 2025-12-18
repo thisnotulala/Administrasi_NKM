@@ -5,9 +5,16 @@
 
     <div class="d-flex justify-content-between align-items-center mb-3">
         <h4>Data SDM</h4>
-        <button class="btn btn-primary" data-toggle="modal" data-target="#createModal">
-            <i class="fas fa-plus-circle"></i> Tambah SDM
-        </button>
+
+        <div>
+            <a href="{{ route('sdm.export.pdf') }}" class="btn btn-danger">
+                <i class="fas fa-file-pdf"></i> Export PDF
+            </a>
+
+            <button class="btn btn-primary" data-toggle="modal" data-target="#createModal">
+                <i class="fas fa-plus-circle"></i> Tambah SDM
+            </button>
+        </div>
     </div>
 
     {{-- Alert --}}

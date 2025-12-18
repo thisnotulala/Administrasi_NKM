@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Barryvdh\DomPDF\Facade\Pdf;
 use App\Models\Progress;
 use App\Models\Proyek;
 use Illuminate\Http\Request;
@@ -94,4 +95,17 @@ class ProgressController extends Controller
 
         return back()->with('warning', 'Progress ditolak dan diminta revisi');
     }
+
+    public function exportPdf()
+    {
+        $progress = Progress::with(['proyek', 'user'])
+            ->orderBy('created_at', 'DESC')
+            ->get();
+
+        $pdf = Pdf::loadView('progress.pdf', compact('progress'))
+                ->setPaper('A4', 'landscape');
+
+        return $pdf->download('laporan-progress-proyek.pdf');
+    }
+
 }
