@@ -194,6 +194,6 @@ class ProyekController extends Controller
         return $pdf->download('laporan-semua-proyek.pdf');
     }
 
-
+    
 
 }

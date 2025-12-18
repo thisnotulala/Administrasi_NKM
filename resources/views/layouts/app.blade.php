@@ -3,42 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@yield('title')</title>
+    <title>@yield('title', 'Sistem Informasi Proyek')</title>
 
-    <!-- Google Font (Modern) -->
-    <link rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap">
+    <!-- GOOGLE FONT -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 
-    <!-- Font Awesome -->
-    <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <!-- FONT AWESOME (FIX ICON TIDAK MUNCUL) -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
 
+    <!-- ADMINLTE -->
+    <link href="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/css/adminlte.min.css" rel="stylesheet">
 
-    <!-- AdminLTE -->
-    <link rel="stylesheet"
-          href="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/css/adminlte.min.css">
-
-    <!-- CUSTOM STYLE (TAMBAHAN SAJA) -->
     <style>
         body {
             font-family: 'Poppins', sans-serif;
         }
 
-        /* WARNA UTAMA PERUSAHAAN */
+        /* WARNA UTAMA */
         .bg-merah {
             background: linear-gradient(135deg, #b30000, #e60000);
         }
 
-        /* BRAND LOGO */
+        /* BRAND */
         .brand-link {
             background: linear-gradient(135deg, #b30000, #e60000);
-            color: #fff !important;
             text-align: center;
         }
 
         .brand-link .brand-text {
             font-weight: 600;
-            font-size: 15px;
+            font-size: 14px;
+            color: #fff !important;
         }
 
         /* SIDEBAR */
@@ -73,7 +68,8 @@
             background-color: #c40000;
             border: none;
         }
-        /* ===== FIX ICON AKSI ===== */
+
+        /* ICON ACTION BUTTON */
         .btn-xs {
             width: 34px;
             height: 34px;
@@ -84,24 +80,11 @@
             justify-content: center;
         }
 
-        .btn-xs i {
-            font-size: 14px;
-        }
-
-        /* Supaya icon benar-benar terlihat */
-        .table td .btn {
-            line-height: 1;
-        }
-
-        /* ===== FIX FONT AWESOME ICON HILANG ===== */
         .btn i.fas {
             font-family: "Font Awesome 5 Free" !important;
-            font-weight: 900 !important; /* INI KUNCI UTAMA */
+            font-weight: 900 !important;
             color: #fff !important;
-            display: inline-block !important;
         }
-
-
     </style>
 </head>
 
@@ -122,14 +105,12 @@
     <!-- SIDEBAR -->
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
 
-        <!-- Logo -->
-        <a href="/" class="brand-link">
-            <span class="brand-text">
-                PT Nusantara Klik Makmur
-            </span>
+        <!-- LOGO -->
+        <a href="{{ url('/') }}" class="brand-link">
+            <span class="brand-text">PT Nusantara Klik Makmur</span>
         </a>
 
-        <!-- Sidebar -->
+        <!-- MENU -->
         <div class="sidebar">
             <nav class="mt-3">
                 <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview">
@@ -161,15 +142,17 @@
                             <p>Equipment</p>
                         </a>
                     </li>
+
                     <li class="nav-item">
-                        <a href="/client" class="nav-link {{ request()->is('equipment*') ? 'active' : '' }}">
-                            <i class="nav-icon fas fa-tools"></i>
+                        <a href="/client" class="nav-link {{ request()->is('client*') ? 'active' : '' }}">
+                            <i class="nav-icon fas fa-user-tie"></i>
                             <p>Client</p>
                         </a>
                     </li>
+
                     <li class="nav-item">
                         <a href="/pengeluaran" class="nav-link {{ request()->is('pengeluaran*') ? 'active' : '' }}">
-                            <i class="nav-icon fas fa-money-bill"></i>
+                            <i class="nav-icon fas fa-money-bill-wave"></i>
                             <p>Pengeluaran</p>
                         </a>
                     </li>
@@ -182,10 +165,9 @@
                     </li>
 
                     <li class="nav-item">
-                        <a href="{{ route('laporan.index') }}"
-                           class="nav-link {{ request()->is('laporan*') ? 'active' : '' }}">
+                        <a href="{{ route('laporan.index') }}" class="nav-link {{ request()->is('laporan*') ? 'active' : '' }}">
                             <i class="nav-icon fas fa-file-alt"></i>
-                            <p>Laporan</p>
+                            <p>Laporan Proyek</p>
                         </a>
                     </li>
 
@@ -198,11 +180,12 @@
 
                     <li class="nav-item">
                         <a href="/user" class="nav-link {{ request()->is('user*') ? 'active' : '' }}">
-                            <i class="nav-icon fas fa-users"></i>
+                            <i class="nav-icon fas fa-user-cog"></i>
                             <p>User Management</p>
                         </a>
                     </li>
 
+                    <!-- LOGOUT -->
                     <li class="nav-item mt-3 px-2">
                         <form action="/logout" method="POST">
                             @csrf
@@ -222,11 +205,9 @@
         @yield('content')
     </div>
 
-    
-
 </div>
 
-<!-- SCRIPTS -->
+<!-- SCRIPT -->
 <script src="https://cdn.jsdelivr.net/npm/admin-lte@3.2/plugins/jquery/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/admin-lte@3.2/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/js/adminlte.min.js"></script>
