@@ -60,6 +60,27 @@ Route::middleware(['auth', 'role:admin,site_manager,administrasi'])
         Route::put('/proyek/{proyek}', [ProyekController::class, 'update'])->name('proyek.update');
         Route::delete('/proyek/{proyek}', [ProyekController::class, 'destroy'])->name('proyek.destroy');
 
+                /*
+        |------------------------------------------
+        | ASSIGN SDM KE PROYEK
+        |------------------------------------------
+        */
+        Route::get(
+            '/proyek/{proyek}/assign/create',
+            [ProyekController::class, 'assignCreate']
+        )->name('proyek.assign.create');
+
+        Route::post(
+            '/proyek/{proyek}/assign',
+            [ProyekController::class, 'assignStore']
+        )->name('proyek.assign.store');
+
+        Route::delete(
+            '/proyek/{proyek}/assign/{sdm}',
+            [ProyekController::class, 'assignDelete']
+        )->name('proyek.assign.destroy');
+
+
 });
 
 
