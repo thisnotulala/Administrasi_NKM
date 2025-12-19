@@ -13,6 +13,7 @@ use App\Http\Controllers\{
     ProgressController,
     SdmController,
     LaporanController,
+    ProfileController,
 };
 
 /*
@@ -48,8 +49,9 @@ Route::get('/dashboard', function () {
 |--------------------------------------------------------------------------
 */
 
-Route::middleware(['auth', 'role:admin,site_manager,administrasi'])
+Route::middleware(['auth', 'role:admin,site_manager,administrasi,kepala_lapangan'])
     ->group(function () {
+
 
         Route::get('/proyek', [ProyekController::class, 'index'])->name('proyek.index');
         Route::get('/proyek/create', [ProyekController::class, 'create'])->name('proyek.create');
@@ -82,6 +84,16 @@ Route::middleware(['auth', 'role:admin,site_manager,administrasi'])
 
 
 });
+
+/*
+|--------------------------------------------------------------------------
+| USER MANAGEMENT (SITE MANAGER ONLY)
+|--------------------------------------------------------------------------
+*/
+Route::middleware(['auth', 'role:site_manager'])->group(function () {
+    Route::resource('user', UserController::class);
+});
+
 
 
 /*
@@ -146,4 +158,15 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/sdm/export/pdf', [SdmController::class, 'exportPdf'])
         ->name('sdm.export.pdf');
+});
+
+
+/*
+|--------------------------------------------------------------------------
+| Profil
+|--------------------------------------------------------------------------
+*/
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
+    Route::post('/profile', [ProfileController::class, 'update'])->name('profile.update');
 });

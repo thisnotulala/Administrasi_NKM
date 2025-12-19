@@ -19,12 +19,10 @@
             font-family: 'Poppins', sans-serif;
         }
 
-        /* WARNA UTAMA */
         .bg-merah {
             background: linear-gradient(135deg, #b30000, #e60000);
         }
 
-        /* BRAND */
         .brand-link {
             background: linear-gradient(135deg, #b30000, #e60000);
             text-align: center;
@@ -36,7 +34,6 @@
             color: #fff !important;
         }
 
-        /* SIDEBAR */
         .main-sidebar {
             background-color: #1f1f1f;
         }
@@ -52,24 +49,20 @@
             color: #fff !important;
         }
 
-        /* CONTENT */
         .content-wrapper {
             background-color: #f4f6f9;
         }
 
-        /* CARD */
         .card {
             border-radius: 12px;
             box-shadow: 0 8px 20px rgba(0,0,0,.05);
         }
 
-        /* BUTTON */
         .btn-danger {
             background-color: #c40000;
             border: none;
         }
 
-        /* ICON ACTION BUTTON */
         .btn-xs {
             width: 34px;
             height: 34px;
@@ -93,6 +86,8 @@
 
     <!-- NAVBAR -->
     <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+
+        <!-- LEFT NAVBAR -->
         <ul class="navbar-nav">
             <li class="nav-item">
                 <a class="nav-link" data-widget="pushmenu" href="#">
@@ -100,17 +95,50 @@
                 </a>
             </li>
         </ul>
+
+        <!-- RIGHT NAVBAR - PROFILE -->
+        <ul class="navbar-nav ml-auto">
+
+            <li class="nav-item dropdown">
+                <a class="nav-link" data-toggle="dropdown" href="#">
+                    <i class="fas fa-user-circle fa-lg"></i>
+                    <span class="ml-1">
+                        {{ auth()->user()->name }}
+                    </span>
+                </a>
+
+                <div class="dropdown-menu dropdown-menu-right">
+                    <span class="dropdown-item dropdown-header text-muted">
+                        {{ ucfirst(auth()->user()->role) }}
+                    </span>
+
+                    <div class="dropdown-divider"></div>
+
+                    <a href="#" class="dropdown-item">
+                        <i class="fas fa-user mr-2"></i> Profile
+                    </a>
+
+                    <div class="dropdown-divider"></div>
+
+                    <form action="/logout" method="POST" class="dropdown-item p-0">
+                        @csrf
+                        <button class="btn btn-link btn-block text-left">
+                            <i class="fas fa-sign-out-alt mr-2"></i> Logout
+                        </button>
+                    </form>
+                </div>
+            </li>
+
+        </ul>
     </nav>
 
     <!-- SIDEBAR -->
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
 
-        <!-- LOGO -->
         <a href="{{ url('/') }}" class="brand-link">
             <span class="brand-text">PT Nusantara Klik Makmur</span>
         </a>
 
-        <!-- MENU -->
         <div class="sidebar">
             <nav class="mt-3">
                 <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview">
@@ -178,14 +206,16 @@
                         </a>
                     </li>
 
+                    {{-- USER MANAGEMENT - SITE MANAGER ONLY --}}
+                    @if(auth()->user()->role === 'site_manager')
                     <li class="nav-item">
                         <a href="/user" class="nav-link {{ request()->is('user*') ? 'active' : '' }}">
                             <i class="nav-icon fas fa-user-cog"></i>
                             <p>User Management</p>
                         </a>
                     </li>
+                    @endif
 
-                    <!-- LOGOUT -->
                     <li class="nav-item mt-3 px-2">
                         <form action="/logout" method="POST">
                             @csrf
@@ -200,17 +230,36 @@
         </div>
     </aside>
 
-    <!-- CONTENT -->
     <div class="content-wrapper p-4">
         @yield('content')
     </div>
 
 </div>
 
-<!-- SCRIPT -->
-<script src="https://cdn.jsdelivr.net/npm/admin-lte@3.2/plugins/jquery/jquery.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/admin-lte@3.2/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- jQuery HARUS PERTAMA -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- Bootstrap Bundle (sudah termasuk Popper.js) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- AdminLTE -->
 <script src="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/js/adminlte.min.js"></script>
+
+<!-- Script untuk Modal -->
+<script>
+$(document).ready(function() {
+    // Pastikan modal berfungsi
+    $('[data-toggle="modal"]').on('click', function(e) {
+        e.preventDefault();
+        var target = $(this).data('target');
+        $(target).modal('show');
+    });
+});
+</script>
+
+@stack('scripts')
+</body>
+</html>
 
 </body>
 </html>
