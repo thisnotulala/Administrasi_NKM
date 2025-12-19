@@ -63,7 +63,8 @@ class ProgressController extends Controller
         $p = Progress::findOrFail($id);
 
         if ($p->validasi === 'valid') {
-            return back()->with('info', 'Progress sudah disetujui.');
+        return redirect()->route('progress.index')
+            ->with('info', 'Progress sudah disetujui.');
         }
 
         $p->update([

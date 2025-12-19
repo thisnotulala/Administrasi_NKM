@@ -108,6 +108,9 @@ Route::middleware('auth')->group(function () {
     Route::resource('jadwal', JadwalProyekController::class);
     Route::resource('client', ClientController::class);
     Route::resource('user', UserController::class);
+    Route::post('/progress/{id}/validasi', [ProgressController::class, 'validateProgress'])
+    ->name('progress.validate')
+    ->middleware(['auth','role:site_manager']);
     Route::resource('progress', ProgressController::class);
     Route::resource('sdm', SdmController::class);
 });
@@ -117,9 +120,6 @@ Route::middleware('auth')->group(function () {
 | PROGRESS ACTION
 |--------------------------------------------------------------------------
 */
-Route::post('/progress/{id}/validasi', [ProgressController::class, 'validateProgress'])
-    ->name('progress.validate')
-    ->middleware(['auth','role:site_manager']);
 
 Route::post('/progress/{id}/revisi', [ProgressController::class, 'revisiProgress'])
     ->name('progress.revisi')
